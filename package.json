@@ -1,6 +1,6 @@
 {
   "name": "alua-sentinel",
-  "version": "1.0.0-alpha.0",
+  "version": "1.0.0-beta.1",
   "description": "AI Content Integrity Verification Suite",
   "main": "dist/index.js",
   "scripts": {
