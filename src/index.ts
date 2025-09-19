@@ -2,7 +2,7 @@ import { TextDetector } from './detectors/text-detector';
 import { ImageDetector } from './detectors/image-detector';
 import { TFModel } from './ml/tf-model';
 
-export class ALuaSentinel {
+class ALuaSentinel {
   private version: string = '1.0.0-beta';
   private textDetector: TextDetector;
   private imageDetector: ImageDetector;
@@ -17,8 +17,7 @@ export class ALuaSentinel {
     this.imageDetector = new ImageDetector();
     
     this.initialize().then(() => {
-      console.log(`✅ ALua Sentinel v${this.version} initialized - الأقوى عالمياً`);
-      console.log('🔧 Engine: Pattern Analysis + Statistical Analysis + TensorFlow.js');
+      console.log(`✅ ALua Sentinel v${this.version} initialized`);
     }).catch(error => {
       console.warn('⚠️ Initialization completed with fallback mode');
     });
@@ -29,13 +28,14 @@ export class ALuaSentinel {
       await this.tfModel.initialize();
       this.isInitialized = true;
     } catch (error) {
-      console.warn('⚠️ TensorFlow initialization skipped, using enhanced fallback');
+      console.warn('⚠️ TensorFlow initialization skipped');
+      this.isInitialized = false;
     }
   }
 
   public async analyzeText(content: string): Promise<any> {
     if (!content || content.trim().length < 10) {
-      throw new Error('Text content must be at least 10 characters long');
+      throw new Error('Content must be at least 10 characters long');
     }
 
     const analysis = await this.textDetector.analyzeText(content);
@@ -46,7 +46,7 @@ export class ALuaSentinel {
         Math.min(0.99, 0.5 + (analysis.confidence / 2)),
       isAIGenerated: analysis.isAIGenerated,
       confidence: analysis.confidence,
-      reasons: analysis.reasons.slice(0, 10), // Limit to top 10 reasons
+      reasons: analysis.reasons.slice(0, 10),
       tfScore: analysis.tfScore,
       metadata: {
         ...analysis.metadata,
@@ -56,8 +56,7 @@ export class ALuaSentinel {
       },
       timestamp: new Date().toISOString(),
       version: this.version,
-      engine: this.isInitialized ? 'Advanced AI Detection Suite' : 'Enhanced Fallback Mode',
-      model: this.isInitialized ? 'TensorFlow.js + Pattern Recognition' : 'Pattern Recognition Only'
+      engine: this.isInitialized ? 'Advanced AI Detection Suite' : 'Enhanced Statistical Analysis'
     };
   }
 
@@ -71,10 +70,7 @@ export class ALuaSentinel {
       metrics: analysis.metrics,
       timestamp: new Date().toISOString(),
       version: this.version,
-      engine: 'Image Forensic Analysis',
-      warning: analysis.isAIGenerated ? 
-        'Potential AI-generated content detected' : 
-        'No signs of AI generation detected'
+      engine: 'Image Forensic Analysis'
     };
   }
 
@@ -98,24 +94,12 @@ export class ALuaSentinel {
   }
 
   public generateIntegrityCertificate(results: any): string {
-    return `📜 ALua Integrity Certificate 
-🔖 Version: ${results.version}
-⚙️ Engine: ${results.engine}
-📅 Date: ${results.timestamp}
-
-📊 RESULTS:
-✅ Integrity Score: ${(results.integrityScore * 100).toFixed(1)}%
-🤖 AI Generated: ${results.isAIGenerated ? 'YES' : 'NO'} 
+    return `📜 ALua Integrity Certificate
+✅ Score: ${(results.integrityScore * 100).toFixed(1)}%
+🤖 AI Generated: ${results.isAIGenerated ? 'Yes' : 'No'}
 🎯 Confidence: ${(results.confidence * 100).toFixed(1)}%
-${results.tfScore ? `🧠 TF.js Score: ${(results.tfScore * 100).toFixed(1)}%` : ''}
-
-📈 METADATA:
-📝 Text Length: ${results.metadata?.textLength || 'N/A'} characters
-🔤 Word Count: ${results.metadata?.wordCount || 'N/A'} words
-📋 Patterns Detected: ${results.reasons?.length || 0}
-
-${results.isAIGenerated ? '⚠️ WARNING: Potential AI-generated content' : '✅ VERIFIED: Human-like content'}
-${results.integrityScore < 0.3 ? '🚨 HIGH RISK: Low integrity score' : ''}`;
+📅 Date: ${results.timestamp}
+🔖 Version: ${results.version}`;
   }
 
   public getVersion(): string {
@@ -130,9 +114,7 @@ ${results.integrityScore < 0.3 ? '🚨 HIGH RISK: Low integrity score' : ''}`;
         'Statistical Text Analysis', 
         ...(this.isInitialized ? ['TensorFlow.js AI Detection'] : ['Enhanced Fallback Mode']),
         'Real-time Processing',
-        'Multi-layer Verification',
-        'Batch Processing',
-        'Comprehensive Reporting'
+        'Multi-layer Verification'
       ]
     };
   }
@@ -143,59 +125,40 @@ ${results.integrityScore < 0.3 ? '🚨 HIGH RISK: Low integrity score' : ''}`;
       status: this.getStatus(),
       timestamp: new Date().toISOString(),
       nodeVersion: process.version,
-      platform: process.platform,
-      memoryUsage: process.memoryUsage(),
-      uptime: process.uptime()
+      platform: process.platform
     };
   }
 }
 
-// أمثلة استخدام متقدمة
-if (require.main === module) {
-  const sentinel = new ALuaSentinel();
-  
-  // اختبار بعد التهيئة
-  setTimeout(async () => {
-    console.log('\n🧪 Testing ALua Sentinel Advanced Detection...\n');
-    
-    // نصوص اختبارية
-    const testCases = [
-      "As an AI language model, I'm designed to provide helpful and accurate responses based on my training data.",
-      "I think this is really interesting! From my experience, people often make typos and use informal language.",
-      "The quick brown fox jumps over the lazy dog. This is a simple test sentence.",
-      "Based on my analysis of the data patterns and algorithmic processing, I can generate a response."
-    ];
-
-    for (let i = 0; i < testCases.length; i++) {
-      console.log(`\n--- Test Case ${i + 1} ---`);
-      console.log(`📝 Text: "${testCases[i].substring(0, 60)}..."`);
-      
-      try {
-        const results = await sentinel.analyzeText(testCases[i]);
-        console.log(sentinel.generateIntegrityCertificate(results));
-        
-        if (results.reasons && results.reasons.length > 0) {
-          console.log('\n🔍 Top Reasons:');
-          results.reasons.slice(0, 3).forEach((reason: string, idx: number) => {
-            console.log(`  ${idx + 1}. ${reason}`);
-          });
-        }
-      } catch (error) {
-        console.error('❌ Analysis error:', error);
-      }
-      
-      console.log('─'.repeat(50));
-    }
-
-    // عرض معلومات النظام
-    const systemInfo = await sentinel.getSystemInfo();
-    console.log('\n🖥️ System Information:');
-    console.log(`Node.js: ${systemInfo.nodeVersion}`);
-    console.log(`Platform: ${systemInfo.platform}`);
-    console.log(`Status: ${systemInfo.status.initialized ? 'FULLY INITIALIZED' : 'FALLBACK MODE'}`);
-
-  }, 2000); // انتظار التهيئة
+interface TextAnalysisResult {
+  integrityScore: number;
+  isAIGenerated: boolean;
+  confidence: number;
+  reasons: string[];
+  tfScore?: number;
+  metadata: any;
+  timestamp: string;
+  version: string;
+  engine: string;
 }
 
-// التصدير للاستخدام كوحدة
+interface ImageAnalysisResult {
+  integrityScore: number;
+  isAIGenerated: boolean;
+  confidence: number;
+  metrics: any;
+  timestamp: string;
+  version: string;
+  engine: string;
+}
+
+interface SystemStatus {
+  initialized: boolean;
+  features: string[];
+}
+
+export { ALuaSentinel };
 export default ALuaSentinel;
+export { TextDetector } from './detectors/text-detector';
+export { ImageDetector } from './detectors/image-detector';
+export { TFModel } from './ml/tf-model';
