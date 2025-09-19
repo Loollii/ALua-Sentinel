@@ -1,0 +1,63 @@
+import { TextAnalyzer } from '../analyzers/text-analyzer';
+
+export class TextDetector {
+  private patterns = {
+    aiPatterns: [
+      /as an ai language model/i,
+      /as a large language model/i,
+      /i am an ai/i,
+      /i cannot|i'm unable/i
+    ],
+    humanPatterns: [
+      /typo|mistake|oops/i,
+      /slang|colloquial/i,
+      /personal experience|i remember/i
+    ]
+  };
+
+  private textAnalyzer: TextAnalyzer;
+
+  constructor() {
+    this.textAnalyzer = new TextAnalyzer();
+  }
+
+  public analyzeText(text: string): { isAIGenerated: boolean; confidence: number; reasons: string[]; metadata?: any } {
+    const reasons: string[] = [];
+    let aiScore = 0;
+    let humanScore = 0;
+
+    // التحليل الأساسي
+    this.patterns.aiPatterns.forEach(pattern => {
+      if (pattern.test(text)) {
+        aiScore += 0.3;
+        reasons.push(`AI pattern detected: ${pattern.source}`);
+      }
+    });
+
+    this.patterns.humanPatterns.forEach(pattern => {
+      if (pattern.test(text)) {
+        humanScore += 0.2;
+        reasons.push(`Human pattern detected: ${pattern.source}`);
+      }
+    });
+
+    // التحليل المتقدم
+    const advancedAnalysis = this.textAnalyzer.analyzeAdvanced(text);
+    aiScore += advancedAnalysis.metadata.aiProbability * 0.4;
+    humanScore += advancedAnalysis.metadata.humanProbability * 0.4;
+
+    reasons.push(...advancedAnalysis.indicators);
+
+    const isAIGenerated = aiScore > humanScore;
+    const confidence = Math.abs(aiScore - humanScore);
+
+    return {
+      isAIGenerated,
+      confidence,
+      reasons,
+      metadata: advancedAnalysis.metadata
+    };
+  }
+
+  // ... rest of the code remains the same
+}

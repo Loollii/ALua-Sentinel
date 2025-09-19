@@ -1,0 +1,29 @@
+{
+  "name": "alua-sentinel",
+  "version": "1.0.0-alpha.0",
+  "description": "AI Content Integrity Verification Suite",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "ts-node src/index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "ai",
+    "detection",
+    "security"
+  ],
+  "author": "Saleh AbuGhabraa <SALEH87ALALLY@GMAIL.COM>",
+  "license": "MIT",
+  "dependencies": {
+    "@tensorflow/tfjs": "^4.22.0",
+    "axios": "^1.12.2",
+    "crypto-js": "^4.2.0",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^18.19.127",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.2"
+  }
+}
