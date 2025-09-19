@@ -17,6 +17,7 @@
   "license": "MIT",
   "dependencies": {
     "@tensorflow/tfjs": "^4.22.0",
+    "@tensorflow/tfjs-backend-cpu": "^4.22.0",
     "axios": "^1.12.2",
     "crypto-js": "^4.2.0",
     "uuid": "^9.0.1"
