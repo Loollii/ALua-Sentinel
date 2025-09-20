@@ -1,6 +1,6 @@
 {
   "name": "alua-sentinel",
-  "version": "1.0.0-beta.1",
+ "version": "1.0.0",
   "description": "Advanced AI content integrity verification platform",
   "main": "dist/index.js",
   "types": "dist/types/index.d.ts",
