@@ -23,6 +23,23 @@ Enterprise-grade AI-generated content detection and verification platform with u
 
 bash
 npm install alua-sentinel
+🎯 New: Professional Dashboard
+Experience the world's most advanced AI content analysis with our real-time dashboard:
+
+ ✨ Dashboard Features:
+- 📊 Real-time Analytics** - Live monitoring of AI detection metrics
+- 🎯 Integrity Scoring** - Advanced content authenticity assessment  
+- ⚡ Quick Actions** - One-click analysis, export, and sharing
+- 📈 Timeline Charts** - Visual analysis history tracking
+- 🏥 System Health** - Live performance monitoring
+
+ 🚀 Access Dashboard:
+```bash
+cd dashboard
+npm install
+npm run dev
+🎨 Dashboard Preview:
+https://via.placeholder.com/800x400/6366f1/ffffff?text=ALua+Sentinel+Dashboard
 Basic Usage
 const { ALuaSentinel } = require('alua-sentinel');
 
