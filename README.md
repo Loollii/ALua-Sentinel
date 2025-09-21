@@ -1,4 +1,14 @@
 # 🛡️ ALua Sentinel - World's Most Advanced AI Content Integrity Suite
+# ALua Sentinel
+
+[![GitHub license](https://img.shields.io/github/license/Loollii/ALua-Sentinel)](https://github.com/Loollii/ALua-Sentinel/blob/main/LICENSE)
+[![GitHub issues](https://img.shields.io/github/issues/Loollii/ALua-Sentinel)](https://github.com/Loollii/ALua-Sentinel/issues)
+[![GitHub stars](https://img.shields.io/github/stars/Loollii/ALua-Sentinel)](https://github.com/Loollii/ALua-Sentinel/stargazers)
+![Made with Lua](https://img.shields.io/badge/Made%20With-Lua-blue?logo=lua)
+
+
+
+
 
 [![Version](https://img.shields.io/badge/version-1.0.0--beta.1-blue)]()
 [![License](https://img.shields.io/badge/license-MIT-green)]()
